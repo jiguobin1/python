@@ -1,5 +1,6 @@
 # coding=utf-8
 #author：jiguobin
+from selenium import webdriver
 import os
 
 print(os.name)
