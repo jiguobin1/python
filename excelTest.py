@@ -4,9 +4,9 @@ import xlrd
 import xlwt
 from xlutils.copy import copy
 
-# book = xlrd.open_workbook('D:\pythonTest.xlsx') #打开一个excel
-# sheet = book.sheet_by_index(0) #根据顺序获取sheet
-# # sheet2 = book.sheet_by_name('2') #根据sheet页名字获取sheet
+book = xlrd.open_workbook('D:\pythonTest.xlsx') #打开一个excel
+sheet = book.sheet_by_index(0) #根据顺序获取sheet
+# sheet2 = book.sheet_by_name('2') #根据sheet页名字获取sheet
 # print(sheet.cell(1,2).value)  #指定行和列获取数据
 # # print(sheet2.cell(0,1).value)
 # print(sheet.ncols) #获取excel里面有多少列
@@ -14,10 +14,10 @@ from xlutils.copy import copy
 # l=sheet.row_values(1)#取第几行的数据,如果数据是int类型  转换一下
 # print(' '.join([str(x) for x in l]))
 # print(sheet.col_values(1)) #取第几列的数据
-# #获取excel中所有的数据
-# for i in range(sheet.nrows): # 获取excel中有多少行
-#     print(sheet.row_values(i))
-    # print(' '.join([str(x) for x in sheet.row_values(i)])) #转换str
+#获取excel中所有的数据
+for i in range(sheet.nrows): # 获取excel中有多少行
+    print(sheet.row_values(i))
+    print(' '.join([str(x) for x in sheet.row_values(i)])) #转换str
 #--------------------------------------------------------------------
 
 
@@ -50,12 +50,12 @@ from xlutils.copy import copy
 
 
 
-book1 = xlrd.open_workbook('D:\Excel.xls')
-book2 = copy(book1)  #拷贝一份原来的excel
-sheet = book2.get_sheet(0) #获取第几个sheet页
-sheet.write(1,3,0)#写入需要修改的行、列及修改后的值
-sheet.write(1,0,'小黑')
-book2.save('D:\Excel.xls')
+# book1 = xlrd.open_workbook('D:\Excel.xls')
+# book2 = copy(book1)  #拷贝一份原来的excel
+# sheet = book2.get_sheet(0) #获取第几个sheet页
+# sheet.write(1,3,0)#写入需要修改的行、列及修改后的值
+# sheet.write(1,0,'小黑')
+# book2.save('D:\Excel.xls')
 
 
 
