@@ -33,13 +33,24 @@ class WsPage(ActionMethod):
             self.clear('id','configureName')
             self.input('id','configureName',self.data[1])
         self.click('id','noSelcetPassTypeName')
-        self.click('link_text',self.data[2])
+        self.click('link_text',self.data[2])  #选择通道名称
         self.click('id','noSelcetAlipayRateName')
-        self.click('link_text',self.data[3])
+        self.click('link_text',self.data[3])   #支付宝费率名称
         self.click('id','noSelcetWechatRateName')
-        self.click('link_text',self.data[4])
-        self.input('')
-        pass
+        self.click('link_text',self.data[4])   #微信费率名称
+        self.input('id','configureRemark',self.data[5])
+        self.clear('id','fullNameCn')
+        self.input('id','fullNameCn',self.data[6])#商户名称
+        self.click('id','noSelectBusinessCategory')
+        self.click('link_text',self.data[7]) #经营类型
+        if self.data[0]=='个人':   #判断商户类型
+            self.click('id','shoptype1')
+        elif self.data[0]=='个体':
+            self.click('id','shoptype2')
+        else:
+            self.click('id','shoptype3')
+
+
 
 
 w=WsPage('EW_N6268478142',0,2)
