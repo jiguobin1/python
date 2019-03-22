@@ -5,6 +5,7 @@ from base.find_element import FindElement
 import time
 from PIL import Image
 from util.ShowapiRequest import ShowapiRequest
+import xlrd
 class ActionMethod:
     #打开浏览器
     def open_browser(self,browser):
@@ -135,17 +136,17 @@ class ActionMethod:
         self.sleep_time(1)
 
     #选择进件的商户和类型
-    def Incoming(self,id,type):
+    def Incoming(self,id):
         '''
         :param id: 进件的商户
         :param type: 进件的类型
         '''
-        if type=='网商':
-            types='addBankConfigureForWS'
-        elif type=='客商':
-            types='addBankConfigureForKS'
-        elif type=='微信官方':
-            types='addWechatConfigure'
+        # if type=='网商':
+        #     types='addBankConfigureForWS'
+        # elif type=='客商':
+        #     types='addBankConfigureForKS'
+        # elif type=='微信官方':
+        #     types='addWechatConfigure'
         self.login_ms()
         self.click('link_text','商户管理')
         self.click('link_text','商户总部（一般）')
@@ -157,5 +158,16 @@ class ActionMethod:
         self.click('id','query')
         self.sleep_time(1)
         self.click('id','details')
-        self.click('id',types)
+
+    #获取excel中哪一行的数据
+    def get_excel_value(self,file_name,sheet,row):
+        '''
+        :param file_name:打开excel
+        :param sheet: 获取页数
+        :param row:
+        '''
+        book = xlrd.open_workbook(file_name) #打开一个excel
+        sheet = book.sheet_by_index(sheet)
+        data=sheet.row_values(row)
+        return data
 
