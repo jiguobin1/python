@@ -40,6 +40,21 @@ class ActionMethod:
     def click_element(self,node,key):
         self.get_element(node,key).click()
 
+    #清空文本
+    def clear(self,type,value):
+        if type == "xpath":
+            self.driver.find_element_by_xpath(value).clear()
+        elif type == "class_name":
+            self.driver.find_element_by_class_name(value).clear()
+        elif type == "id":
+            self.driver.find_element_by_id(value).clear()
+        elif type == "name":
+            self.driver.find_element_by_name(value).clear()
+        elif type == "link_text":
+            self.driver.find_element_by_link_text(value).clear()
+        elif type == "partial_link_text":
+            self.driver.find_element_by_partial_link_text(value).clear()
+
     # 输入内容方法
     def input(self, type, value, inputvalue):
         if type == "xpath":
@@ -160,12 +175,17 @@ class ActionMethod:
         self.click('id','details')
 
     #获取excel中哪一行的数据
-    def get_excel_value(self,file_name,sheet,row):
+    def get_excel_value(self,sheet,row,file_name=None):
         '''
         :param file_name:打开excel
         :param sheet: 获取页数
         :param row:
         '''
+        if file_name == None:
+            #默认地址
+            file_name = 'D:\liantuo\python\config\ws.xlsx'
+        else:
+            self.file_name=file_name
         book = xlrd.open_workbook(file_name) #打开一个excel
         sheet = book.sheet_by_index(sheet)
         data=sheet.row_values(row)
