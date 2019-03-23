@@ -15,9 +15,13 @@ class Ecxel(object):
         return l
 
 if __name__ == '__main__':
-    file_name='D:\pythonTest.xlsx'
+    file_name='D:\liantuo\python\config\ws.xlsx'
     excel=Ecxel(file_name,0)
-    print(excel.get_excel_value(1))
+    one=excel.get_excel_value(0)
+    two=excel.get_excel_value(2)
+    print(one)
+    print(two)
+    print(dict(zip(one,two)))
     pass
 
 

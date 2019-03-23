@@ -15,6 +15,8 @@ class ActionMethod:
             self.driver = webdriver.Firefox()
         else:
             self.driver = webdriver.Edge()
+        self.driver.implicitly_wait(10)
+        self.driver.maximize_window()
 
     #输入地址
     def get_url(self,url):
@@ -150,29 +152,29 @@ class ActionMethod:
         self.click_element('LoginElement','submit')
         self.sleep_time(1)
 
-    #选择进件的商户和类型
-    def Incoming(self,id):
-        '''
-        :param id: 进件的商户
-        :param type: 进件的类型
-        '''
-        # if type=='网商':
-        #     types='addBankConfigureForWS'
-        # elif type=='客商':
-        #     types='addBankConfigureForKS'
-        # elif type=='微信官方':
-        #     types='addWechatConfigure'
-        self.login_ms()
-        self.click('link_text','商户管理')
-        self.click('link_text','商户总部（一般）')
-        self.switch_frame('contframe')
-        self.input('id','searchContent',id)
-        self.click('id','searchContent')
-        self.sleep_time(2)
-        self.click('class_name','item')
-        self.click('id','query')
-        self.sleep_time(1)
-        self.click('id','details')
+    # #选择进件的商户和类型
+    # def Incoming(self,id):
+    #     '''
+    #     :param id: 进件的商户
+    #     :param type: 进件的类型
+    #     '''
+    #     # if type=='网商':
+    #     #     types='addBankConfigureForWS'
+    #     # elif type=='客商':
+    #     #     types='addBankConfigureForKS'
+    #     # elif type=='微信官方':
+    #     #     types='addWechatConfigure'
+    #     self.login_ms()
+    #     self.click('link_text','商户管理')
+    #     self.click('link_text','商户总部（一般）')
+    #     self.switch_frame('contframe')
+    #     self.input('id','searchContent',id)
+    #     self.click('id','searchContent')
+    #     self.sleep_time(2)
+    #     self.click('class_name','item')
+    #     self.click('id','query')
+    #     self.sleep_time(1)
+    #     self.click('id','details')
 
     #获取excel中哪一行的数据
     def get_excel_value(self,sheet,row,file_name=None):
