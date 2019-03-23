@@ -79,8 +79,9 @@ class WsPage(ActionMethod):
         else:
             self.click('id','shoptype3')
         self.click('id','next')
-        self.clear('id','nameCn')
+        self.sleep_time(0.5)
         #商户详细信息
+        self.clear('id','nameCn')
         self.input('id','nameCn',self.data['商户简称'])
         if self.data['商户类型']!='个人':  #个人没有营业执照编号
             self.input('id','businessLicenseNo',self.data['营业执照编号'])
@@ -107,5 +108,23 @@ class WsPage(ActionMethod):
         else:
             self.input('id','companyCorporation',self.data['法人'])
             self.input('id','certificateNo',self.data['法人证件号'])
+        #进件资料图片  火狐不可传空 谷歌可以传空
+        if self.data['商户类型']!='个人':
+            self.input('id','multipartFile0',self.data['营业执照照片'])
+        if self.data['商户类型']=='企业':
+            self.input('id','multipartFile1',self.data['开户许可证'])
+        self.input('id','multipartFile2',self.data['身份证正面'])
+        self.input('id','multipartFile3',self.data['身份证反面'])
+        self.input('id','multipartFile4',self.data['门头照'])
+        self.input('id','multipartFile5',self.data['店内环境照'])
+        # self.input('id','multipartFile6',self.data['银行卡'])
+        # self.input('id','multipartFile7',self.data['其他照片'])
+
+
+w=WsPage(0,6)
+w.ws()
+
+
+
 
 

@@ -6,6 +6,7 @@ import time
 from PIL import Image
 from util.ShowapiRequest import ShowapiRequest
 import xlrd
+import pymysql
 class ActionMethod:
     #打开浏览器
     def open_browser(self,browser):
@@ -126,8 +127,10 @@ class ActionMethod:
 
     #登录ms
     def login_ms(self):
+        #firefox
+        #chrome
         #file_name='D:\image_code.png'
-        self.open_browser('chrome')
+        self.open_browser('firefox')
         self.get_url('http://192.168.19.103:8000/ms/login.in')
         self.element_send_keys('LoginElement','user_name','csdls')
         self.element_send_keys('LoginElement','user_password','111qqq')
@@ -192,4 +195,7 @@ class ActionMethod:
         sheet = book.sheet_by_index(sheet)
         data=sheet.row_values(row)
         return data
+
+
+
 
