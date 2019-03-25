@@ -126,58 +126,127 @@ class ActionMethod:
         return text
 
     #登录ms
-    def login_ms(self):
-        #firefox
-        #chrome
-        #file_name='D:\image_code.png'
-        self.open_browser('firefox')
-        self.get_url('http://192.168.19.103:8000/ms/login.in')
-        self.element_send_keys('LoginElement','user_name','csdls')
-        self.element_send_keys('LoginElement','user_password','111qqq')
-        # self.get_code_image(file_name)
-        # code_text=self.code_online(file_name)
-        # self.element_send_keys('code_text',code_text)
-        self.sleep_time(5)
-        self.click_element('LoginElement','submit')
-        self.sleep_time(1)
+    def login_ms(self,url,type=None,name=None,password=None):
+        '''
+        :param url: 环境url
+        :param type: 浏览器类型
+        :param name: 账户
+        :param password: 密码
+        :return:
+        '''
+        if type==None:
+            types='chrome'
+        elif type=='f':
+            types='firefox'
+        self.open_browser(types)
+        #如果url=测试环境，账号和密码为默认
+        if url=='test':
+            test_url='http://192.168.19.103:8000/ms/login.in'
+            if name==None and password==None:
+                test_name='csdls'
+                test_password='111qqq'
+            else:
+                test_name=name
+                test_password=password
+            self.get_url(test_url)
+            self.input('id','logInName',test_name)
+            self.input('id','password',test_password)
+        #如果url=灰度环境，账号和密码为默认
+        elif url=='huidu':
+            huidu_url='http://intms.51ebill.com/ms/login.in'
+            if name==None and password==None:
+                huidu_name='dlscs2'
+                huidu_password='111qqq'
+            else:
+                huidu_name=name
+                huidu_password=password
+            self.get_url(huidu_url)
+            self.input('id','logInName',huidu_name)
+            self.input('id','password',huidu_password)
+        #如果url=线上环境，账号和密码为默认
+        elif url=='online':
+            online_url='http://ms.liantuobank.com/ms/login.in'
+            if name==None and password==None:
+                online_name='dlscs2'
+                online_password='111qqq'
+            else:
+                online_name=name
+                online_password=password
+            self.get_url(online_url)
+            self.input('id','logInName',online_name)
+            self.input('id','password',online_password)
+        file_name='D:\image_code.png'
+        self.get_code_image(file_name)
+        code_text=self.code_online(file_name)
+        self.input('id','verifyCodeInput',code_text)
+        self.click('id','submitForm')
+        if self.driver.find_element_by_id('errorVerifyCode').text=='验证码输入错误':
+            self.get_code_image(file_name)
+            code_text=self.code_online(file_name)
+            self.input('id','verifyCodeInput',code_text)
+            self.click('id','submitForm')
+            self.sleep_time(2)
+
+
 
     #登录cms
-    def login_cms(self):
-        #file_name='D:\image_code.png'
-        self.open_browser('chrome')
-        self.get_url('http://192.168.19.25:8000/cms/login.in')
-        self.element_send_keys('LoginElement','user_name','jrpt')
-        self.element_send_keys('LoginElement','user_password','111qqq')
+    def login_cms(self,url,type=None,name=None,password=None):
+        '''
+        :param url: 环境url
+        :param type: 浏览器类型
+        :param name: 账户
+        :param password: 密码
+        :return:
+        '''
+        if type==None:
+            types='chrome'
+        else:
+            types=type
+        self.open_browser(types)
+        #如果url=测试环境，账号和密码为默认
+        if url=='test':
+            test_url='http://192.168.19.25:8000/cms/login.in'
+            if name==None and password==None:
+                test_name='jrpt'
+                test_password='111qqq'
+            else:
+                test_name=name
+                test_password=password
+            self.get_url(test_url)
+            self.input('id','logInName',test_name)
+            self.input('id','password',test_password)
+        #如果url=灰度环境，账号和密码为默认
+        elif url=='huidu':
+            huidu_url='http://intcms.51ebill.com/cms/login.in'
+            if name==None and password==None:
+                huidu_name='xuqiandls'
+                huidu_password='111qqq'
+            else:
+                huidu_name=name
+                huidu_password=password
+            self.get_url(huidu_url)
+            self.input('id','logInName',huidu_name)
+            self.input('id','password',huidu_password)
+        #如果url=线上环境，账号和密码为默认
+        elif url=='online':
+            online_url='http://cms.liantuobank.com/cms/login.in'
+            if name==None and password==None:
+                online_name='xuqiandls'
+                online_password='111qqq'
+            else:
+                online_name=name
+                online_password=password
+            self.get_url(online_url)
+            self.input('id','logInName',online_name)
+            self.input('id','password',online_password)
+        # file_name='D:\image_code.png'
         # self.get_code_image(file_name)
         # code_text=self.code_online(file_name)
-        # self.element_send_keys('code_text',code_text)
+        # self.input('id','verifyCodeInput',code_text)
         self.sleep_time(5)
-        self.click_element('LoginElement','submit')
-        self.sleep_time(1)
+        self.click('id','submitForm')
+        self.sleep_time(2)
 
-    # #选择进件的商户和类型
-    # def Incoming(self,id):
-    #     '''
-    #     :param id: 进件的商户
-    #     :param type: 进件的类型
-    #     '''
-    #     # if type=='网商':
-    #     #     types='addBankConfigureForWS'
-    #     # elif type=='客商':
-    #     #     types='addBankConfigureForKS'
-    #     # elif type=='微信官方':
-    #     #     types='addWechatConfigure'
-    #     self.login_ms()
-    #     self.click('link_text','商户管理')
-    #     self.click('link_text','商户总部（一般）')
-    #     self.switch_frame('contframe')
-    #     self.input('id','searchContent',id)
-    #     self.click('id','searchContent')
-    #     self.sleep_time(2)
-    #     self.click('class_name','item')
-    #     self.click('id','query')
-    #     self.sleep_time(1)
-    #     self.click('id','details')
 
     #获取excel中哪一行的数据
     def get_excel_value(self,sheet,row,file_name=None):
