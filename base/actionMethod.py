@@ -126,7 +126,7 @@ class ActionMethod:
         return text
 
     #登录ms
-    def login_ms(self,url,type=None,name=None,password=None):
+    def login_ms(self,type=None,url=None,name=None,password=None):
         '''
         :param url: 环境url
         :param type: 浏览器类型
@@ -140,7 +140,7 @@ class ActionMethod:
             types='firefox'
         self.open_browser(types)
         #如果url=测试环境，账号和密码为默认
-        if url=='test':
+        if url=='测试':
             test_url='http://192.168.19.103:8000/ms/login.in'
             if name==None and password==None:
                 test_name='csdls'
@@ -152,7 +152,7 @@ class ActionMethod:
             self.input('id','logInName',test_name)
             self.input('id','password',test_password)
         #如果url=灰度环境，账号和密码为默认
-        elif url=='huidu':
+        elif url=='灰度':
             huidu_url='http://intms.51ebill.com/ms/login.in'
             if name==None and password==None:
                 huidu_name='dlscs2'
@@ -164,7 +164,7 @@ class ActionMethod:
             self.input('id','logInName',huidu_name)
             self.input('id','password',huidu_password)
         #如果url=线上环境，账号和密码为默认
-        elif url=='online':
+        elif url=='生产':
             online_url='http://ms.liantuobank.com/ms/login.in'
             if name==None and password==None:
                 online_name='dlscs2'
@@ -176,16 +176,17 @@ class ActionMethod:
             self.input('id','logInName',online_name)
             self.input('id','password',online_password)
         file_name='D:\image_code.png'
-        self.get_code_image(file_name)
-        code_text=self.code_online(file_name)
-        self.input('id','verifyCodeInput',code_text)
+        # self.get_code_image(file_name)
+        # code_text=self.code_online(file_name)
+        # self.input('id','verifyCodeInput',code_text)
+        self.sleep_time(4)
         self.click('id','submitForm')
-        if self.driver.find_element_by_id('errorVerifyCode').text=='验证码输入错误':
-            self.get_code_image(file_name)
-            code_text=self.code_online(file_name)
-            self.input('id','verifyCodeInput',code_text)
-            self.click('id','submitForm')
-            self.sleep_time(2)
+        # if self.driver.find_element_by_id('errorVerifyCode').text=='验证码输入错误':
+        #     self.get_code_image(file_name)
+        #     code_text=self.code_online(file_name)
+        #     self.input('id','verifyCodeInput',code_text)
+        #     self.click('id','submitForm')
+        #     self.sleep_time(2)
 
 
 

@@ -4,20 +4,21 @@ from base.actionMethod import ActionMethod
 import random
 import string
 class WsPage(ActionMethod):
-    def incoming(self,row,sheet=0):
-        rows=row-1
-        data=(dict(zip(self.get_excel_value(0,0), self.get_excel_value(sheet,rows))))
-        print(rows)
-        self.click('xpath','//*[@id="togglemenu"]/li[1]/a')
+    def wsIncoming(self,row,sheet=0):
+        data=(dict(zip(self.get_excel_value(0,0), self.get_excel_value(sheet,row-1))))
+        print(data)
+        self.login_ms(type='f',url=data['环境'],name=data['代理商登录账号'],password=data['代理商登录密码'])#登录
+
+        self.click('xpath','//*[@id="togglemenu"]/li[1]/a')   #商户管理
         self.sleep_time(0.5)
         #判断是商户还是门店进件
         if data['商户id']!='':
-            self.click('xpath','//*[@id="togglemenu"]/li[1]/ul/li[2]/a')
+            self.click('xpath','//*[@id="togglemenu"]/li[1]/ul/li[2]/a')   #商户总部
             self.switch_frame('contframe')
             self.input('id','searchContent',data['商户id'])
             self.click('id','searchContent')
         elif data['门店id']!='':
-            self.click('xpath','//*[@id="togglemenu"]/li[1]/ul/li[3]/a')
+            self.click('xpath','//*[@id="togglemenu"]/li[1]/ul/li[3]/a')   #商户门店
             self.switch_frame('contframe')
             self.input('id','storeContent',data['门店id'])
             self.click('id','storeContent')
@@ -34,7 +35,7 @@ class WsPage(ActionMethod):
             pass
         else:
             self.clear('id','configureName')
-            self.input('id','configureName',data[1])
+            self.input('id','configureName',data['配置名称'])
         self.click('id','noSelcetPassTypeName')
         self.click('link_text',data['通道名称'])  #选择通道名称
         self.sleep_time(0.5)
@@ -91,11 +92,11 @@ class WsPage(ActionMethod):
         if data['商户类型']!='个人':
             self.input('id','multipartFile0',data['营业执照照片'])
         if data['商户类型']=='企业':
-            self.input('id','multipartFile1',data['开户许可证'])
-        self.input('id','multipartFile2',data['身份证正面'])
-        self.input('id','multipartFile3',data['身份证反面'])
-        self.input('id','multipartFile4',data['门头照'])
-        self.input('id','multipartFile5',data['店内环境照'])
+            self.input('id','multipartFile6',data['开户许可证'])
+        self.input('id','multipartFile1',data['身份证正面'])
+        self.input('id','multipartFile2',data['身份证反面'])
+        self.input('id','multipartFile3',data['门头照'])
+        self.input('id','multipartFile4',data['店内环境照'])
         # self.input('id','multipartFile6',self.data['银行卡'])
         # self.input('id','multipartFile7',self.data['其他照片'])
 
