@@ -47,13 +47,13 @@ class ActionMethod:
     def clear(self,type,value):
         if type == "xpath":
             self.driver.find_element_by_xpath(value).clear()
-        elif type == "class_name":
+        elif type == "class name":
             self.driver.find_element_by_class_name(value).clear()
         elif type == "id":
             self.driver.find_element_by_id(value).clear()
         elif type == "name":
             self.driver.find_element_by_name(value).clear()
-        elif type == "link_text":
+        elif type == "link text":
             self.driver.find_element_by_link_text(value).clear()
         elif type == "partial_link_text":
             self.driver.find_element_by_partial_link_text(value).clear()
@@ -62,13 +62,13 @@ class ActionMethod:
     def input(self, type, value, inputvalue):
         if type == "xpath":
             self.driver.find_element_by_xpath(value).send_keys(inputvalue)
-        elif type == "class_name":
+        elif type == "class name":
             self.driver.find_element_by_class_name(value).send_keys(inputvalue)
         elif type == "id":
             self.driver.find_element_by_id(value).send_keys(inputvalue)
         elif type == "name":
             self.driver.find_element_by_name(value).send_keys(inputvalue)
-        elif type == "link_text":
+        elif type == "link text":
             self.driver.find_element_by_link_text(value).send_keys(inputvalue)
         elif type == "partial_link_text":
             self.driver.find_element_by_partial_link_text(value).send_keys(inputvalue)
@@ -77,13 +77,13 @@ class ActionMethod:
     def click(self, type, value):
         if type == "xpath":
             self.driver.find_element_by_xpath(value).click()
-        elif type == "class_name":
+        elif type == "class name":
             self.driver.find_element_by_class_name(value).click()
         elif type == "id":
             self.driver.find_element_by_id(value).click()
         elif type == "name":
             self.driver.find_element_by_name(value).click()
-        elif type == "link_text":
+        elif type == "link text":
             self.driver.find_element_by_link_text(value).click()
         elif type == "partial_link_text":
             self.driver.find_element_by_partial_link_text(value).click()
